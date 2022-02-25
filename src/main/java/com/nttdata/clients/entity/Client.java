@@ -18,6 +18,4 @@ public class Client {
 	String documentNumber;
 	int type;
 	boolean active;
-	
-
 }
