@@ -5,8 +5,7 @@ public class Constants {
 	public static final class ClientType
     {
         public static int PERSONAL = 1;
-        public static int BUSINESS = 2;
-        
+        public static int BUSINESS = 2;     
     }
-
+	
 }
