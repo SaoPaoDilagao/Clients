@@ -1,5 +1,6 @@
 package com.nttdata.clients.service;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,9 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Mono<Client> searchClientById(Integer id) {
-		return clientRepository.findById(id);
+	//public Mono<Client> searchClientById(Integer id) {
+	public Mono<Client> searchClientById(String id) {
+		return clientRepository.findById(new ObjectId(id));
 	}
 
 	@Override
@@ -69,9 +71,11 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public Mono<Client> deleteClient(Integer id) {
+	//public Mono<Client> deleteClient(Integer id) {
+	public Mono<Client> deleteClient(String id) {
 		
-		return clientRepository.findById(id)
+		//return clientRepository.findById(id)
+		return clientRepository.findById(new ObjectId(id))
                 .map(client -> {
                     client.setActive(false);
                     clientRepository.save(client).subscribe();

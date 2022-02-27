@@ -1,5 +1,6 @@
 package com.nttdata.clients.repository;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,8 @@ import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface ClientRepository extends ReactiveMongoRepository<Client, Integer>{
+//public interface ClientRepository extends ReactiveMongoRepository<Client, Integer>{
+public interface ClientRepository extends ReactiveMongoRepository<Client, ObjectId>{
 	
 	Flux<Client> findByLastName(String lastName);
 	Mono<Client> findByDocumentNumber(String Document);

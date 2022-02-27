@@ -33,7 +33,8 @@ public class ClientController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Mono<Client>> searchClientById(@PathVariable("id") Integer id){
+	//public ResponseEntity<Mono<Client>> searchClientById(@PathVariable("id") Integer id){
+	public ResponseEntity<Mono<Client>> searchClientById(@PathVariable("id") String id){
 		
 		Mono<Client> client = clientService.searchClientById(id);
 		
@@ -69,7 +70,8 @@ public class ClientController {
 	
 	
 	@DeleteMapping("{id}")
-	public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") Integer id){
+	//public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") Integer id){
+	public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") String id){
 		
 		return clientService.deleteClient(id).map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.notFound().build());
