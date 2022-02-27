@@ -1,5 +1,7 @@
 package com.nttdata.clients.entity;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +14,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @Document
 public class Client {
-	int id;
-	String firstName;
-	String lastName;
-	String documentNumber;
-	int type;
-	boolean active;
+	//@Id
+	//private ObjectId id;
+	private int id;
+	private String firstName;
+	private String lastName;
+	private String documentNumber;
+	private int type;
+	private boolean active;
 }

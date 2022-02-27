@@ -15,5 +15,4 @@ public interface ClientRepository extends ReactiveMongoRepository<Client, Intege
 	
 	Flux<Client> findByLastName(String lastName);
 	Mono<Client> findByDocumentNumber(String Document);
-
 }
