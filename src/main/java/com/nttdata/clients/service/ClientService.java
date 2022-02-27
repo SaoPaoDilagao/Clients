@@ -12,6 +12,6 @@ public interface ClientService {
 	Flux<Client> searchClientByLastName(String lastName);
 	Mono<Client> searchClientByDocument(String documentNumber);
 	Mono<Client> updateClient(Client e);
-	Mono<Void> deleteClient(Integer id);
+	Mono<Client> deleteClient(Integer id);
 
 }

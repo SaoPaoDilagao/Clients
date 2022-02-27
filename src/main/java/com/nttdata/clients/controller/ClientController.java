@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nttdata.clients.entity.Client;
@@ -27,12 +26,10 @@ public class ClientController {
 	private ClientService clientService;
 	
 	@PostMapping
-	public ResponseEntity<Mono<Client>> createClient(@RequestBody Client client){
+	public Mono<ResponseEntity<Client>> createClient(@RequestBody Client client){
 		
-		Mono<Client> dummy =  clientService.createClient(client);
-		
-		return new ResponseEntity<Mono<Client>>(dummy,dummy != null? HttpStatus.CREATED:HttpStatus.BAD_REQUEST);
-		
+		return clientService.createClient(client).map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.badRequest().build());
 	}
 	
 	@GetMapping("/id/{id}")
@@ -64,16 +61,19 @@ public class ClientController {
 	}
 	
 	@PutMapping
-	public Mono<Client> updateClient(@RequestBody Client client){
+	public Mono<ResponseEntity<Client>> updateClient(@RequestBody Client client){
 		
-		return clientService.updateClient(client);
+		return clientService.updateClient(client).map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
 	}
 	
 	
 	@DeleteMapping("{id}")
-	public Mono<Void> deleteClient(@PathVariable("id") Integer id){
+	public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") Integer id){
 		
-		return clientService.deleteClient(id);
+		return clientService.deleteClient(id).map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.notFound().build());
+                
 	}
 	
 }
