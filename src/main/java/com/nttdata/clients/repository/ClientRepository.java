@@ -12,8 +12,7 @@ import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface ClientRepository extends ReactiveMongoRepository<Client, Integer>{
-//public interface ClientRepository extends ReactiveMongoRepository<Client, ObjectId>{
+public interface ClientRepository extends ReactiveMongoRepository<Client, ObjectId>{
 	
 	Flux<Client> findByLastName(String lastName);
 	Mono<Client> findByDocumentNumber(String Document);
