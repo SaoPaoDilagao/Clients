@@ -8,12 +8,12 @@ import reactor.core.publisher.Mono;
 public interface ClientService {
 	
 	Mono<Client> createClient(Client client);
-	//Mono<Client> searchClientById(Integer id);
-	Mono<Client> searchClientById(String id);
+	Mono<Client> searchClientById(Integer id);
+	//Mono<Client> searchClientById(String id);
 	Flux<Client> searchClientByLastName(String lastName);
 	Mono<Client> searchClientByDocument(String documentNumber);
 	Mono<Client> updateClient(Client e);
-	//Mono<Client> deleteClient(Integer id);
-	Mono<Client> deleteClient(String id);
+	Mono<Client> deleteClient(Integer id);
+	//Mono<Client> deleteClient(String id);
 
 }
