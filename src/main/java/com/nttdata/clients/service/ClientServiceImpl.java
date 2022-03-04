@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService{
 		return clientRepository.findByDocumentNumber(client.getDocumentNumber())
 				.switchIfEmpty(clientRepository.save(client)
 						.map(x-> {
-							logger_file.debug("Created a new id= {} for the client with document number= {}", client.getId(), client.getDocumentNumber());
+							logger_file.info("Created a new id= {} for the client with document number= {}", client.getId(), client.getDocumentNumber());
 							logger_consola.info("Created a new id= {} for the client with document number= {}", client.getId(), client.getDocumentNumber());
 							return x;})
 						);
@@ -61,7 +61,7 @@ public class ClientServiceImpl implements ClientService{
                     
                     clientRepository.save(client).subscribe();
                     
-                    logger_file.debug("Updated the client with id= {}", client.getId());
+                    logger_file.info("Updated the client with id= {}", client.getId());
             		logger_consola.info("Updated the client with id= {}", client.getId());
                     
                     return client;
@@ -77,7 +77,7 @@ public class ClientServiceImpl implements ClientService{
                     client.setActive(false);
                     clientRepository.save(client).subscribe();
                     
-                    logger_file.debug("Deleted the client with id= {}", id);
+                    logger_file.info("Deleted the client with id= {}", id);
                     logger_consola.info("Deleted the client with id= {}", id);
                     
                     return client;
