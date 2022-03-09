@@ -87,6 +87,7 @@
 			</plugin>
 			
 			<!-- CheckStyle -->
+			<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
@@ -108,9 +109,10 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			
+			-->
+
 			<!-- Jacoco -->
+			<!--
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -131,7 +133,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+			-->
 		</plugins>
 	</build>
 

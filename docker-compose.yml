@@ -3,14 +3,18 @@ services:
   client-server:
     container_name: client-server
     build: .
+    restart: always
     depends_on:
-      - eureka-server
-      - config-server
+      - mongo_db
     environment:
-      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka"
       - "SPRING_PROFILES_ACTIVE=docker"
     ports:
       - "8095:8095"
+  mongo_db:
+    image: "mongo:5.0.1"
+    restart: always
+    ports:
+      - "27018:27017"
 networks:
   default:
     name: custom-network
