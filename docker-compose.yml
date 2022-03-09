@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  client-server:
+    container_name: client-server
+    build: .
+    depends_on:
+      - eureka-server
+      - config-server
+    environment:
+      - "EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka"
+      - "SPRING_PROFILES_ACTIVE=docker"
+    ports:
+      - "8095:8095"
+networks:
+  default:
+    name: custom-network
