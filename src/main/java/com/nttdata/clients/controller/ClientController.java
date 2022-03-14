@@ -1,5 +1,6 @@
 package com.nttdata.clients.controller;
 
+import com.nttdata.clients.dto.request.ClientRequest;
 import com.nttdata.clients.entity.Client;
 import com.nttdata.clients.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import javax.validation.Valid;
 
 /**
  * RestController for client service.
@@ -23,6 +25,12 @@ import reactor.core.publisher.Mono;
 public class ClientController {
   @Autowired
   private ClientService clientService;
+
+  @PostMapping
+  public Mono<Client> createClient(@Valid @RequestBody ClientRequest request) {
+    Client client = new Client(request);
+    return clientService.createClient(client);
+  }
 
   @GetMapping("/id/{id}")
   public Mono<Client> searchClientById(@PathVariable("id") String id) {
@@ -40,16 +48,12 @@ public class ClientController {
     return clientService.searchClientByDocument(documentNumber);
   }
 
-  @PostMapping
-  public Mono<Client> createClient(@RequestBody Client client) {
-    return clientService.createClient(client);
-  }
-
   /**
    * Update client information.
    */
   @PutMapping
-  public Mono<ResponseEntity<Client>> updateClient(@RequestBody Client client) {
+  public Mono<ResponseEntity<Client>> updateClient(@RequestBody ClientRequest request) {
+    Client client = new Client(request);
     return clientService.updateClient(client)
         .map(ResponseEntity::ok)
         .defaultIfEmpty(ResponseEntity.notFound().build());
@@ -58,7 +62,7 @@ public class ClientController {
   /**
    * Delete client by id.
    */
-  @DeleteMapping("{id}")
+  @DeleteMapping("/{id}")
   public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") String id) {
     return clientService.deleteClient(id)
         .map(ResponseEntity::ok)

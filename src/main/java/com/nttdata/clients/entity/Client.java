@@ -3,6 +3,7 @@ package com.nttdata.clients.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.nttdata.clients.dto.request.ClientRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,10 +25,19 @@ public class Client {
   @Id
   @JsonSerialize(using = ToStringSerializer.class)
   private ObjectId id;
+  private String documentNumber;
   private String firstName;
   private String lastName;
-  private String documentNumber;
-  private int profile;
   private int type;
+  private int profile;
   private boolean active;
+
+  public Client(ClientRequest request) {
+    documentNumber = request.getDocumentNumber();
+    firstName = request.getFirstName();
+    lastName = request.getLastName();
+    type = request.getType();
+    profile = request.getProfile();
+    active = true;
+  }
 }

@@ -3,6 +3,7 @@ package com.nttdata.clients.service;
 import com.nttdata.clients.entity.Client;
 import com.nttdata.clients.exceptions.customs.CustomNotFoundException;
 import com.nttdata.clients.repository.ClientRepository;
+import com.nttdata.clients.utilities.Validations;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,18 +42,18 @@ public class ClientServiceImpl implements ClientService {
 
   @Override
   public Mono<Client> createClient(Client client) {
-    client.setActive(true);
-
-    return clientRepository.findByDocumentNumber(client.getDocumentNumber())
-        .switchIfEmpty(clientRepository.save(client)
-            .map(x -> {
-              logger_file.info("Created a new id= {} for the client with document number= {}",
-                  client.getId(), client.getDocumentNumber());
-              logger_consola.info("Created a new id= {} for the client with document number= {}",
-                  client.getId(), client.getDocumentNumber());
-              return x;
-            })
-        );
+    return Validations.validateCreateClient(client)
+        .flatMap(c -> clientRepository.findByDocumentNumber(client.getDocumentNumber())
+            .switchIfEmpty(clientRepository.save(client)
+                .map(x -> {
+                  logger_file.info("Created a new id= {} for the client with document number= {}",
+                      client.getId(), client.getDocumentNumber());
+                  logger_consola
+                      .info("Created a new id= {} for the client with document number= {}",
+                          client.getId(), client.getDocumentNumber());
+                  return x;
+                })
+            ));
   }
 
   @Override
