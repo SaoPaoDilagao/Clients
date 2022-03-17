@@ -3,8 +3,8 @@ package com.nttdata.clients.controller;
 import com.nttdata.clients.dto.request.ClientRequest;
 import com.nttdata.clients.entity.Client;
 import com.nttdata.clients.service.ClientService;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,21 +51,19 @@ public class ClientController {
   /**
    * Update client information.
    */
-  @PutMapping
-  public Mono<ResponseEntity<Client>> updateClient(@RequestBody ClientRequest request) {
+  @PutMapping("/id/{id}")
+  public Mono<Client> updateClient(@PathVariable String id,
+                                                   @RequestBody ClientRequest request) {
     Client client = new Client(request);
-    return clientService.updateClient(client)
-        .map(ResponseEntity::ok)
-        .defaultIfEmpty(ResponseEntity.notFound().build());
+    client.setId(new ObjectId(id));
+    return clientService.updateClient(client);
   }
 
   /**
    * Delete client by id.
    */
   @DeleteMapping("/{id}")
-  public Mono<ResponseEntity<Client>> deleteClient(@PathVariable("id") String id) {
-    return clientService.deleteClient(id)
-        .map(ResponseEntity::ok)
-        .defaultIfEmpty(ResponseEntity.notFound().build());
+  public Mono<Client> deleteClient(@PathVariable("id") String id) {
+    return clientService.deleteClient(id);
   }
 }
