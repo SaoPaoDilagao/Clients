@@ -7,6 +7,7 @@ import com.nttdata.clients.controller.ClientController;
 import com.nttdata.clients.dto.request.ClientRequest;
 import com.nttdata.clients.entity.Client;
 import com.nttdata.clients.service.ClientService;
+import com.nttdata.clients.utilities.Constants;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
@@ -130,6 +132,24 @@ class ClientsApplicationTests {
 				.body(Mono.just(client), Client.class)
 				.exchange()
 				.expectStatus().isOk();
+	}
+
+	@Test
+	void testCreateError() {
+		Client client = new Client();
+		client.setFirstName("Juan");
+		client.setLastName("Perez");
+		client.setType(1);
+		client.setProfile(1);
+
+		var responseBody = webTestClient
+				.post()
+				.uri("/clients")
+				.contentType(APPLICATION_JSON)
+				.accept(APPLICATION_JSON)
+				.body(Mono.just(client), Client.class)
+				.exchange()
+				.expectStatus().isBadRequest();
 	}
 
 	@Test

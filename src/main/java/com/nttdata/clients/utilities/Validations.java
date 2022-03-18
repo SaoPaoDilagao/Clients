@@ -19,11 +19,13 @@ public class Validations {
   public static Mono<Client> validateCreateClient(Client client) {
     if (client.getType() == Constants.ClientType.PERSONAL) {
       if (client.getProfile() == Constants.ClientProfile.PYME) {
-        throw new CustomInformationException("A personal type customer cannot have this profile");
+        return Mono.error(new CustomInformationException("A personal type customer "
+            + "cannot have this profile"));
       }
     } else {
       if (client.getProfile() == Constants.ClientProfile.VIP) {
-        throw new CustomInformationException("A business type customer cannot have this profile");
+        return Mono.error(new CustomInformationException("A business type customer "
+            + "cannot have this profile"));
       }
     }
 
