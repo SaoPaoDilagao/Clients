@@ -3,6 +3,7 @@ package com.nttdata.clients.controller;
 import com.nttdata.clients.dto.request.ClientRequest;
 import com.nttdata.clients.entity.Client;
 import com.nttdata.clients.service.ClientService;
+import javax.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import javax.validation.Valid;
 
 /**
  * RestController for client service.
