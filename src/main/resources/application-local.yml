@@ -5,6 +5,7 @@ spring:
     config:
       profile: local
 
+
 eureka:
   client:
     service-url:
