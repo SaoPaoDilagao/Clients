@@ -32,6 +32,11 @@ public class Client {
   private int profile;
   private boolean active;
 
+  /**
+   * Return client from an ClientRequest.
+   *
+   * @param request ClientRequest object
+   */
   public Client(ClientRequest request) {
     documentNumber = request.getDocumentNumber();
     firstName = request.getFirstName();
