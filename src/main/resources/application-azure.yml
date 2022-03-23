@@ -8,4 +8,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: https://bootcamp-eurekaserver.azurewebsites.net/eureka
+      defaultZone: https://bootcamp-eurekaserver.azurewebsites.net:443/eureka
