@@ -18,9 +18,7 @@ jobs:
           java-version: '11'
 
       - name: Build with Maven
-        run: mvn clean install
-        env:
-          SPRING_PROFILES_ACTIVE: azure
+        run: mvn clean install -P azure
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
@@ -28,5 +26,3 @@ jobs:
           app-name: 'bootcamp-clients'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: '${{ github.workspace }}/target/*.jar'
-        env:
-          SPRING_PROFILES_ACTIVE: azure
