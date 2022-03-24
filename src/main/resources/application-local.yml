@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:configserver:https://config-server-project01.azurewebsites.net
+    import: optional:configserver:http://localhost:7000
   cloud:
     config:
       profile: local
@@ -9,4 +9,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: https://eureka-server-project01.azurewebsites.net/eureka
+      defaultZone: http://localhost:8761/eureka
