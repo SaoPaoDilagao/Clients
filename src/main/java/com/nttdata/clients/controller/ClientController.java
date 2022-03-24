@@ -6,6 +6,7 @@ import com.nttdata.clients.service.ClientService;
 import javax.validation.Valid;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,14 @@ import reactor.core.publisher.Mono;
 public class ClientController {
   @Autowired
   private ClientService clientService;
+
+  @Value("${spring.profiles.active}")
+  private String profile;
+
+  @GetMapping("/test")
+  public String test() {
+    return profile;
+  }
 
   @PostMapping
   public Mono<Client> createClient(@Valid @RequestBody ClientRequest request) {
