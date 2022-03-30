@@ -27,7 +27,7 @@ public class ClientController {
   @Autowired
   private ClientService clientService;
 
-  @Value("${spring.profiles.active}")
+  @Value("${spring.cloud.config.profile}")
   private String profile;
 
   @GetMapping("/test")

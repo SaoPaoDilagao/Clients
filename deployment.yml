@@ -1,28 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: clients
+  name: client-service-app
   labels:
-    app: clients
+    app: client-service-app
 spec:
+  replicas: 2
   selector:
     matchLabels:
-      app: clients
+      app: client-service-app
   template:
     metadata:
       labels:
-        app: clients
+        app: client-service-app
     spec:
       containers:
-        - name: clients
-          image: nttdatabootcampacr.azurecr.io/clients:1.0
+        - name: client-service-app
+          image: jordidiaz495/client-service:1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8095
           env:
             - name: SPRING_PROFILES_ACTIVE
-              value: test
+              valueFrom:
+                configMapKeyRef:
+                  name: client-cm
+                  key: active_profile
             - name: SPRING_CLOUD_CONFIG_PROFILE
-              value: prod
-      imagePullSecrets:
-        - name: bootcampsecret
+              valueFrom:
+                configMapKeyRef:
+                  name: client-cm
+                  key: config_profile
