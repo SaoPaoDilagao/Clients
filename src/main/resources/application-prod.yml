@@ -1,6 +1,6 @@
 spring:
   config:
-    import: optional:configserver:http://config-server-svc
+    import: optional:configserver:${CONFIG_SERVER_SVC}
   cloud:
     config:
       profile: prod
