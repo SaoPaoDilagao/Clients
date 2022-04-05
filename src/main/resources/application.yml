@@ -2,10 +2,10 @@ server:
   port: '8095'
 
 spring:
-  profiles:
-    active: @activatedProperties@
   application:
     name: clients
+  profiles:
+    active: ${PROFILE:dev}
 
 management:
   endpoints:
