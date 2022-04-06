@@ -46,7 +46,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.get()
-				.uri("/clients/lname/Perez")
+				.uri("/lname/Perez")
 				.exchange()
 				.expectStatus().isOk()
 				.returnResult(Client.class)
@@ -74,7 +74,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.get()
-				.uri("/clients/id/" + id)
+				.uri("/id/" + id)
 				.exchange()
 				.expectStatus().isOk()
 				.returnResult(Client.class)
@@ -99,7 +99,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.get()
-				.uri("/clients/document/00000001")
+				.uri("/document/00000001")
 				.exchange()
 				.expectStatus().isOk()
 				.returnResult(Client.class)
@@ -126,7 +126,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.post()
-				.uri("/clients")
+				.uri("")
 				.contentType(APPLICATION_JSON)
 				.accept(APPLICATION_JSON)
 				.body(Mono.just(client), Client.class)
@@ -144,7 +144,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.post()
-				.uri("/clients")
+				.uri("")
 				.contentType(APPLICATION_JSON)
 				.accept(APPLICATION_JSON)
 				.body(Mono.just(client), Client.class)
@@ -169,7 +169,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.put()
-				.uri("/clients/id/" + id)
+				.uri("/id/" + id)
 				.contentType(APPLICATION_JSON)
 				.body(Mono.just(client), Client.class)
 				.exchange()
@@ -193,7 +193,7 @@ class ClientsApplicationTests {
 
 		var responseBody = webTestClient
 				.delete()
-				.uri("/clients/" + id)
+				.uri("/" + id)
 				.exchange()
 				.expectStatus().isOk();
 	}
